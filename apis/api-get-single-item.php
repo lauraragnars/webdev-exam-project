@@ -2,6 +2,9 @@
 
 require_once(__DIR__.'/../globals.php');
 
+if( !isset($_POST['item_id'])){ _res(400, ['info' => 'Item id required']); };
+if( strlen($_POST['item_id']) == _ITEMID_LEN){ http_response_code(400); echo 'item_id needs to be'._ITEMID_LEN.' characters'; exit(); }
+
 try{
     $db = _db();
 

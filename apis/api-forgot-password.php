@@ -3,8 +3,8 @@
 require_once(__DIR__.'/../globals.php');
 
 // validate email
-if( ! isset($_POST['email'])){ _res(400, ['info' => 'Email required']); };
-if( ! filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); }
+if( !isset($_POST['email'])){ _res(400, ['info' => 'Email required']); };
+if( !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); }
 
 try{
     $db = _db();
@@ -24,7 +24,7 @@ try{
     $forgot_password_key = $row['forgot_password_key'];
     $user_id = $row['user_id'];
 
-    $_message = "<a href='http:localhost:8888/final-project/webdev-final-project/reset-password.php?key=$forgot_password_key&id=$user_id'>To create a new password click here</a>";
+    $_message = "<a href='http:localhost:8888/reset-password.php?key=$forgot_password_key&id=$user_id'>To create a new password click here</a>";
     $_to_email = $_POST['email'];
   
     require_once(__DIR__.'/../private/send-email.php');

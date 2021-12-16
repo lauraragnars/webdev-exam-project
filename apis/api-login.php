@@ -3,11 +3,11 @@
 require_once(__DIR__.'/../globals.php');
 
 // validate
-if( ! isset($_POST['email'])){ _res(400, ['info' => 'email required']); };
-if( ! filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'email is invalid']); }
+if( !isset($_POST['email'])){ _res(400, ['info' => 'email required']); };
+if( !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'email is invalid']); }
 
 // validate the password
-if( ! isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
+if( !isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
 if( strlen($_POST['password']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
 if( strlen($_POST['password']) > _PASSWORD_MAX_LEN ){ _res(400, ['info' => 'password cannot be more than '._PASSWORD_MAX_LEN.' characters']); };
 

@@ -4,12 +4,12 @@ require_once(__DIR__.'/../globals.php');
 session_start();
 
 // validate the password
-if( ! isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
+if( !isset($_POST['password'])){ _res(400, ['info' => 'password required']); };
 if( strlen($_POST['password']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
 if( strlen($_POST['password']) > _PASSWORD_MAX_LEN ){ _res(400, ['info' => 'password cannot be more than '._PASSWORD_MAX_LEN.' characters']); };
 
 // check that passwords match 
-if( ! isset($_POST['password2'])){ _res(400, ['info' => 'Both password fields required']); };
+if( !isset($_POST['password2'])){ _res(400, ['info' => 'Both password fields required']); };
 if( strlen($_POST['password2']) < _PASSWORD_MIN_LEN ){ _res(400, ['info' => 'password must be at least '._PASSWORD_MIN_LEN.' characters']); };
 if( strlen($_POST['password2']) > _PASSWORD_MAX_LEN ){ _res(400, ['info' => 'password cannot be more than '._PASSWORD_MAX_LEN.' characters']); };
 if($_POST['password2'] !== $_POST['password']){ _res(400, ['info' => 'Passwords do not match']); };

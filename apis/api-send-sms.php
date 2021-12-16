@@ -1,7 +1,11 @@
 <?php
+    // Validate
+    if( !isset($_POST['to_phone'])){ _res(400, ['info' => 'To phone required']);}
+    if( !is_numeric( $_POST['to_phone'] ) ){ _res(400, ['info' => 'Phone number can only contain numbers']); };
+    if( strlen( $_POST['to_phone'] ) < _PHONE_MIN_LEN ){ _res(400, ['info' => 'Phone number min '._PHONE_MIN_LEN.' characters']); };
+    if( strlen( $_POST['to_phone'] ) > _PHONE_MAX_LEN ){ _res(400, ['info' => 'Phone number max '._PHONE_MAX_LEN.' characters']); };
 
-    if( !isset($_POST['to_phone'])){ http_response_code(400); echo 'to_phone required'; exit(); }
-    if( !isset($_POST['message'])){ http_response_code(400); echo 'message required'; exit(); }
+    if( !isset($_POST['message'])){ _res(400, ['info' => 'Message required']);}
 
     $api_key = "286de1fe-c456-4edd-b303-c2c3d1ee25dc";
 

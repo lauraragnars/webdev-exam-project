@@ -2,19 +2,24 @@
 require_once(__DIR__.'/../globals.php');
 
 // Validate
-if( !isset($_POST['item_name'])){ http_response_code(400); echo 'item_name required'; exit(); }
-if(strlen($_POST['item_name']) < _ITEM_MIN_LEN){ http_response_code(400); echo 'item_name min '._ITEM_MIN_LEN.' characters'; exit(); }
-if(strlen($_POST['item_name']) > _ITEM_MAX_LEN){ http_response_code(400); echo 'item_name max '._ITEM_MAX_LEN.' characters'; exit(); }
+if( !isset($_POST['item_name'])){ _res(400, ['info' => 'Item name required']);}
+if( strlen($_POST['item_name']) < _ITEM_MIN_LEN){ _res(400, ['info' => 'Item_name min '._ITEM_MIN_LEN.' characters']);}
+if( strlen($_POST['item_name']) > _ITEM_MAX_LEN){ _res(400, ['info' => 'Item_name max '._ITEM_MAX_LEN.' characters']);}
 
-if( ! isset( $_POST['item_description'] ) ){ _res(400, ['info' => 'Item desc required']); };
+if( !isset($_POST['item_description'])){ _res(400, ['info' => 'Item description required']);}
+if( strlen($_POST['item_description']) < _DESC_MIN_LEN){ _res(400, ['info' => 'Item description min '._DESC_MIN_LEN.' characters']);}
+if( strlen($_POST['item_description']) > _DESC_MAX_LEN){ _res(400, ['info' => 'Item description max '._DESC_MAX_LEN.' characters']);}
 
-if( ! isset( $_POST['item_price'] ) ){ _res(400, ['info' => 'Item price required']); };
+if( !isset($_POST['item_price'])){ _res(400, ['info' => 'Item price required']);}
+if( strlen($_POST['item_price']) < _PRICE_MIN_LEN){ _res(400, ['info' => 'Item price min '._PRICE_MIN_LEN.' characters']);}
+if( strlen($_POST['item_price']) > _PRICE_MAX_LEN){ _res(400, ['info' => 'Item price max '._PRICE_MAX_LEN.' characters']);}
 
-if( ! isset( $_POST['item_image'] ) ){ _res(400, ['info' => 'Item image required']); };
+if( !isset($_POST['item_image'])){ _res(400, ['info' => 'Item image required']);}
+if( strlen($_POST['item_image']) < _IMAGE_MIN_LEN){ _res(400, ['info' => 'Item image min '._IMAGE_MIN_LEN.' characters']);}
+if( strlen($_POST['item_image']) > _IMAGE_MAX_LEN){ _res(400, ['info' => 'Item image max '._IMAGE_MAX_LEN.' characters']);}
 
-if( ! isset( $_POST['item_id'] ) ){ _res(400, ['info' => 'Item id required']); };
-
-// @TODO add validation for all inputs
+if( !isset($_POST['item_id'])){ _res(400, ['info' => 'Item id required']); };
+if( strlen($_POST['item_id']) == _ITEMID_LEN){ _res(400, ['info' => 'item_id needs to be'._ITEMID_LEN.' characters']);}
 
 try{
     $db = _db();

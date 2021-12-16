@@ -7,12 +7,8 @@
 
     $_title = 'User page';
     require_once(__DIR__.'/components/header.php'); 
+    require_once(__DIR__.'/components/nav.php'); 
 ?>
-    <nav>
-        <a href="logout">Logout</a>
-        <a href="home">Home</a>
-    </nav>
-
     <div class="modal">
         <form onsubmit="return false">
             <label for="name">First name</label>

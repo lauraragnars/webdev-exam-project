@@ -10,12 +10,13 @@
 
     require_once(__DIR__.'/private/tsv-parser.php');
     require_once(__DIR__.'/components/header.php');
+    require_once(__DIR__.'/components/nav.php');
 ?>
 
-<nav>
+<!-- <nav>
     <a href="logout">Logout</a>
     <a href="profile">View profile</a>
-</nav>
+</nav> -->
 
 <div class="container">
     <h1>
@@ -104,8 +105,8 @@
                         <div>${item.item_name}</div>
                         <div>${item.item_description}</div>
                         <div>${item.item_price}</div>
-                        <div onclick="deleteItem()">🗑️</div>
-                        <div onclick="editItem()">🖊️</div>
+                        <div class='trash' onclick="deleteItem()">🗑️</div>
+                        <div class='pen' onclick="editItem()">🖊️</div>
                     </div>
                 </div>`)
                 ))

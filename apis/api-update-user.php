@@ -4,26 +4,25 @@ require_once(__DIR__.'/../globals.php');
 session_start();
 
 // Validate name
-if( ! isset( $_POST['name'] ) ){ _res(400, ['info' => 'Name required']); };
+if( !isset( $_POST['name'] ) ){ _res(400, ['info' => 'Name required']); };
 if( strlen( $_POST['name'] ) < _NAME_MIN_LEN ){ _res(400, ['info' => 'Name min '._NAME_MIN_LEN.' characters']); };
 if( strlen( $_POST['name'] ) > _NAME_MAX_LEN ){ _res(400, ['info' => 'Name max '._NAME_MAX_LEN.' characters']); };
 
 // Validate last_name
-if( ! isset( $_POST['last_name'] ) ){ _res(400, ['info' => 'Last name required']); };
+if( !isset( $_POST['last_name'] ) ){ _res(400, ['info' => 'Last name required']); };
 if( strlen( $_POST['last_name'] ) < _NAME_MIN_LEN ){ _res(400, ['info' => 'Last name min '._NAME_MIN_LEN.' characters']); };
 if( strlen( $_POST['last_name'] ) > _NAME_MAX_LEN ){ _res(400, ['info' => 'Last name max '._NAME_MAX_LEN.' characters']); };
 
 // Validate email
-if( ! isset( $_POST['email'] ) ){ _res(400, ['info' => 'Email required']); };
-if( ! filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); };
+if( !isset( $_POST['email'] ) ){ _res(400, ['info' => 'Email required']); };
+if( !filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); };
 
 // Validate phonenumber 
-if( ! isset( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number required']); };
-if( ! is_numeric( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number can only contain numbers']); };
+if( !isset( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number required']); };
+if( !is_numeric( $_POST['phone_number'] ) ){ _res(400, ['info' => 'Phone number can only contain numbers']); };
 if( strlen( $_POST['phone_number'] ) < _PHONE_MIN_LEN ){ _res(400, ['info' => 'Phone number min '._PHONE_MIN_LEN.' characters']); };
 if( strlen( $_POST['phone_number'] ) > _PHONE_MAX_LEN ){ _res(400, ['info' => 'Phone number max '._PHONE_MAX_LEN.' characters']); };
 
-// Connect to DB
 try{
     $db = _db();
   
