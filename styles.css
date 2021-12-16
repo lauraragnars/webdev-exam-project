@@ -37,6 +37,20 @@ a:hover {
   color: rgb(0, 106, 255);
 }
 
+.link {
+  text-align: center;
+  margin: 1rem 0 0;
+  transition: 0.3s;
+}
+
+.link a {
+  color: rgb(0, 106, 255);
+}
+
+.link a:hover {
+  color: rgb(0, 55, 133);
+}
+
 nav {
   width: 100%;
   height: var(--navHeight);
@@ -77,6 +91,10 @@ nav #top #right {
   margin: 2rem;
 }
 
+.middle {
+  text-align: center;
+}
+
 @media (min-width: 800px) {
   .container {
     margin: 10vh 10vw 0;
@@ -87,6 +105,10 @@ nav #top #right {
   text-align: left;
   font-size: 1.5rem;
   color: rgb(0, 106, 255);
+}
+
+.middle h1 {
+  text-align: center;
 }
 
 h1 {

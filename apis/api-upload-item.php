@@ -34,9 +34,13 @@ try{
     $q->bindValue(':item_price', $_POST['item_price']);
     $q->bindValue(':item_image', $_POST['item_image']);
     $q->execute();
-    
-    // what will be returned in conn
-    echo $item_id;
+
+    // SUCCESS
+    header('Content-Type: application/json');
+   
+    $response = ["info" => "Item created with item id: $item_id"];
+    echo json_encode($response);
+     
 }catch(Exception $ex){
     http_response_code(500);
     echo 'System under maintainance';

@@ -13,11 +13,6 @@
     require_once(__DIR__.'/components/nav.php');
 ?>
 
-<!-- <nav>
-    <a href="logout">Logout</a>
-    <a href="profile">View profile</a>
-</nav> -->
-
 <div class="container">
     <h1>
         Welcome, <?php echo $_SESSION['user_name']; ?>
@@ -34,6 +29,7 @@
 
         <label for="image">Item image name</label>
         <input type="text" id="image" name="item_image">
+        <div class="error-message"></div>
         <button onclick="uploadItem()">Upload item</button>
     </form>
 
@@ -67,8 +63,6 @@
 
                 $title = isset($item->title) ? $item->title : $item->title_en;
                 $price = isset($item->price) ? $item->price : $item->price_dk;
-                // $desc = isset($item->desc) ? $item->desc : $item->desc_en;
-                // $desc = $desc ? $item->description : $desc;
 
                 echo "<div class='item' data-id='{$item->id}'>
                         <div class='item-image'>
@@ -102,9 +96,9 @@
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${item.item_image}' />
                     </div>
                     <div class='item-text'>
-                        <div>${item.item_name}</div>
-                        <div>${item.item_description}</div>
-                        <div>${item.item_price}</div>
+                        <div class="price">${item.item_price}</div>
+                        <div class="name">${item.item_name}</div>
+                        <div class="desc">${item.item_description}</div>
                         <div class='trash' onclick="deleteItem()">🗑️</div>
                         <div class='pen' onclick="editItem()">🖊️</div>
                     </div>
@@ -139,9 +133,6 @@
             document.querySelector("#update_desc").value = res.item_description
             document.querySelector("#update_price").value = res.item_price
             document.querySelector("#update_image").value = res.item_image
-
-            // conn ok ? call get Items function again - cleara items fyrst - setja personal items í sér div 
-            // updatea bara í frontendinum - selecta utfra id og uppfæra 
         }
 
         async function updateItem(){           
@@ -172,7 +163,7 @@
                 method: "POST",
                 body: new FormData(form)
             })
-            const res = await conn.text()
+            const res = await conn.json()
             
             if(conn.ok){
                 document.querySelector("#items").insertAdjacentHTML("afterbegin", 
@@ -181,12 +172,15 @@
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${itemImage}' />
                     </div>
                     <div class='item-text'>
-                        <div>${itemName}</div>
-                        <div>${itemDesc}</div>
-                        <div>${itemPrice}</div>
-                        <div onclick="deleteItem()">🗑️</div>
+                        <div class="price">${itemPrice}</div>
+                        <div class="name">${itemName}</div>
+                        <div class="desc">${itemDesc}</div>
+                        <div class='trash' onclick="deleteItem()">🗑️</div>
+                        <div class='pen' onclick="editItem()">🖊️</div>
                     </div>
                 </div>`)
+            } else if (!conn.ok){
+                document.querySelector(".error-message").textContent = res.info;
             }
         }
 
