@@ -1,7 +1,9 @@
 <?php
+$_title = 'Validate email';
 
 require_once(__DIR__.'/globals.php');
 require_once(__DIR__.'/components/header.php');
+
 
 if( !isset($_GET['key'])){
     echo "<div class='container middle'>
@@ -35,7 +37,6 @@ $q = $db->prepare('SELECT * FROM users WHERE user_id = :user_id');
   $q->execute();
   $row = $q->fetch();
 
-// update the user info if the keys match
 if( $_GET['key'] != $row['verification_key']){
     echo "<div class='container middle'>
             <h1>Broken link, please try again</h1>

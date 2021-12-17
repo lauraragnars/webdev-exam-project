@@ -36,12 +36,11 @@ try{
     $q->bindValue(':item_price', $_POST['item_price']);
     $q->bindValue(':item_image', $_POST['item_image']);
     $q->execute();
-
-    header('Content-Type: application/json');
     
     $item_id = $_POST['item_id'];
-    $response = ["info" => "Item updated with id: $item_id"];
-    echo json_encode($response);
+ 
+    _res(200, ['info' => "Item updated with id: $item_id"]);
+
 }catch(Exception $ex){
     _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);
   }

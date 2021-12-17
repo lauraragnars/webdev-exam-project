@@ -31,27 +31,22 @@ try{
   }
 
   try{
-    // Update data 
     $q = $db->prepare('UPDATE users SET user_name = :user_name, user_email = :user_email, user_last_name = :user_last_name, user_phone_number = :user_phone_number WHERE user_email = :email');
-    $q->bindValue(":user_name", $_POST['name']);
-    $q->bindValue(":user_last_name", $_POST['last_name']);
-    $q->bindValue(":user_email", $_POST['email']);
-    $q->bindValue(":user_phone_number", $_POST['phone_number']);
-    $q->bindValue(":email", $_SESSION['user_email']);
+    $q->bindValue(':user_name', $_POST['name']);
+    $q->bindValue(':user_last_name', $_POST['last_name']);
+    $q->bindValue(':user_email', $_POST['email']);
+    $q->bindValue(':user_phone_number', $_POST['phone_number']);
+    $q->bindValue(':email', $_SESSION['user_email']);
     $q->execute();
-
-    // SUCCESS
-    header('Content-Type: application/json');
   
     $_SESSION['user_name'] = $_POST['name'];
     $_SESSION['user_last_name'] = $_POST['last_name'];
     $_SESSION['user_email'] = $_POST['email'];
     $_SESSION['user_phone_number'] = $_POST['phone_number'];
     $_SESSION['user_password'] = $_POST['password'];
-  
-    $response = ["info" => "user info updated"];
-    echo json_encode($response);
     
+    _res(200, ['info' => 'User info updated!']);
+
   }catch(Exception $ex){
     _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);
   }

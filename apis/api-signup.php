@@ -42,7 +42,7 @@ try{
 
 try{
   $q2 = $db->prepare('SELECT * FROM users WHERE user_email = :email');
-  $q2->bindValue(":email", $_POST['email']);
+  $q2->bindValue(':email', $_POST['email']);
   $q2->execute();
   $row = $q2 -> fetch();
   
@@ -60,20 +60,19 @@ try{
   // Insert data in the DB
   $q = $db->prepare('INSERT INTO users 
   VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_phone_number, :user_password, :verification_key, :verified, :forgot_password_key)');
-  $q->bindValue(":user_id", null); // The db will give this automatically. 
-  $q->bindValue(":user_name", $_POST['name']);
-  $q->bindValue(":user_email", $_POST['email']);
-  $q->bindValue(":user_last_name", $_POST['last_name']);
-  $q->bindValue(":user_phone_number", $_POST['phone_number']);
-  $q->bindValue(":user_password", $password);
-  $q->bindValue(":verification_key", $verification_key);
-  $q->bindValue(":forgot_password_key", $forgot_password_key);
-  $q->bindValue(":verified", 0);
+  $q->bindValue(':user_id', null); // The db will give this automatically. 
+  $q->bindValue(':user_name', $_POST['name']);
+  $q->bindValue(':user_email', $_POST['email']);
+  $q->bindValue(':user_last_name', $_POST['last_name']);
+  $q->bindValue(':user_phone_number', $_POST['phone_number']);
+  $q->bindValue(':user_password', $password);
+  $q->bindValue(':verification_key', $verification_key);
+  $q->bindValue(':forgot_password_key', $forgot_password_key);
+  $q->bindValue(':verified', 0);
 
   $q->execute();
 
   $user_id = $db->lastinsertid();
-
 
   // SUCCESS
   header('Content-Type: application/json');
@@ -85,18 +84,17 @@ try{
   $_SESSION['user_email'] = $_POST['email'];
   $_SESSION['user_phone_number'] = $_POST['phone_number'];
 
-  $response = ["info" => "user created", "user_id" => $user_id];
-  echo json_encode($response);
-
   $_message = "Thank you for signing up <a href='http:localhost:8888/validate-user.php?key=$verification_key&id=$user_id'>Click here to verify your account</a>";
 
   $_to_email = $_POST['email'];
 
-  $_sms_message = "User created on Zillow";
+  $_sms_message = 'User created on Zillow';
   $_to_phone = $_POST['phone_number'];
 
   require_once(__DIR__.'/../private/send-email.php');
   require_once(__DIR__.'/../private/send-sms.php');
+
+  _res(200, ['info' => 'user created', 'user_id' => $user_id]);
 
 }catch(Exception $ex){
   http_response_code(500);

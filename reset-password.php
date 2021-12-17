@@ -1,4 +1,5 @@
 <?php
+$_title = 'Reset password';
 
 require_once(__DIR__.'/globals.php');
 require_once(__DIR__.'/components/header.php');
@@ -31,7 +32,7 @@ try{
 }
 
 $q = $db->prepare('SELECT * FROM users WHERE user_id = :user_id');
-  $q->bindValue(":user_id", $_GET['id']);
+  $q->bindValue(':user_id', $_GET['id']);
   $q->execute();
   $row = $q->fetch();
 
@@ -44,7 +45,6 @@ if( $_GET['key'] != $row['forgot_password_key']){
         </div>";
     exit();
 }
-
 ?>
 
 <div class="wrapper">
@@ -83,7 +83,7 @@ if( $_GET['key'] != $row['forgot_password_key']){
         } else if (conn.ok){
             document.querySelector(".error-message").textContent = res.info
         }
-        console.log(res)
+
         }
 </script>
 

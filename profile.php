@@ -5,7 +5,7 @@
         exit();
     };
 
-    $_title = 'User page';
+    $_title = 'Profile page';
     require_once(__DIR__.'/components/header.php'); 
     require_once(__DIR__.'/components/nav.php'); 
 ?>
@@ -47,9 +47,8 @@
        if (!conn.ok){
            document.querySelector(".message-info").textContent = res.info
        } else if (conn.ok){
-            document.querySelector(".message-info").textContent = "User info updated!"
+            document.querySelector(".message-info").textContent = res.info
        }
-       console.log(res)
     }
 
     async function changePassword(){
@@ -62,9 +61,8 @@
        if (!conn.ok){
            document.querySelector(".message-password").textContent = res.info
        } else if (conn.ok){
-            document.querySelector(".message-password").textContent = "Password changed!"
+            document.querySelector(".message-password").textContent = res.info
        }
-       console.log(res)
     }
 </script>
     

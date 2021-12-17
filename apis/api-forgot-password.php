@@ -2,7 +2,7 @@
 
 require_once(__DIR__.'/../globals.php');
 
-// validate email
+// validate
 if( !isset($_POST['email'])){ _res(400, ['info' => 'Email required']); };
 if( !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL ) ){ _res(400, ['info' => 'Email is invalid']); }
 
@@ -14,7 +14,6 @@ try{
 }
 
 try{
-    // get data
     $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
     $q->bindValue(':user_email', $_POST['email']);
     $q->execute();
@@ -29,10 +28,7 @@ try{
   
     require_once(__DIR__.'/../private/send-email.php');
 
-    header('Content-Type: application/json');
-    
-    $response = ['info' => 'Email sent!'];
-    echo json_encode($response);
+    _res(200, ['info' => 'Email sent!']);
 
 }catch(Exception $ex){
     _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);

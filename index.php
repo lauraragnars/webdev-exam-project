@@ -27,14 +27,14 @@ require_once(__DIR__.'/components/header.php');
 
     <script>
         async function login(){
-           const form = event.target.form;
-           document.querySelector(".lds-dual-ring").style.display = "inline-block";
-           document.querySelector(".error-message").textContent = ""
-           let conn = await fetch("./apis/api-login.php", {
-               method: "POST",
-               body: new FormData(form)
-           }) 
-           let res = await conn.json();
+            const form = event.target.form;
+            document.querySelector(".lds-dual-ring").style.display = "inline-block";
+            document.querySelector(".error-message").textContent = ""
+            let conn = await fetch("./apis/api-login.php", {
+                method: "POST",
+                body: new FormData(form)
+            }) 
+            let res = await conn.json();
 
             if (!conn.ok){
                 document.querySelector(".lds-dual-ring").style.display = "none";
@@ -42,24 +42,21 @@ require_once(__DIR__.'/components/header.php');
             } else if (conn.ok){
                 location.href = "home"
             }
-            console.log(res)
         }
 
         async function forgotPassword(){
-           const form = document.querySelector("#login-form")
-           document.querySelector(".error-message").textContent = ""
-           let conn = await fetch("./apis/api-forgot-password.php", {
-               method: "POST",
-               body: new FormData(form)
-           }) 
-           let res = await conn.json();
-
+            const form = document.querySelector("#login-form")
+            document.querySelector(".error-message").textContent = ""
+            let conn = await fetch("./apis/api-forgot-password.php", {
+                method: "POST",
+                body: new FormData(form)
+            }) 
+            let res = await conn.json();
             if (!conn.ok){
                 document.querySelector(".error-message").textContent = res.info
             } else if (conn.ok){
                 document.querySelector(".error-message").textContent = res.info
             }
-            console.log(res)
         }
     </script>
 <?php

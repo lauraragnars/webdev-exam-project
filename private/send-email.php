@@ -9,7 +9,6 @@ use PHPMailer\PHPMailer\Exception;
 require_once(__DIR__.'/../mailer/Exception.php');
 require_once(__DIR__.'/../mailer/PHPMailer.php');
 require_once(__DIR__.'/../mailer/SMTP.php');
-// require_once(__DIR__.'/../apis/api-signup.php');
 
 // Load Composer's autoloader
 // require 'vendor/autoload.php';

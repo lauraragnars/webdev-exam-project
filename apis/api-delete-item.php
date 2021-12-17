@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__.'/../globals.php');
 
+if( !isset($_POST['item_id'])){ _res(400, ['info' => 'Item id required']);}
+
 try{
     $db = _db();
 

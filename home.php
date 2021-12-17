@@ -92,7 +92,6 @@
                 method: "POST"
             })
             const res = await conn.json()
-            console.log(res, "items res")
             if(conn.ok){
                 res.forEach((item) =>(
                     document.querySelector("#own-items").insertAdjacentHTML("afterbegin", 
@@ -130,16 +129,12 @@
             const closeModal = document.querySelector(".close-modal")
             const itemId = item.dataset.id
 
-            console.log(itemId, "item id")
             let formData = new FormData();
             formData.append('item_id', itemId);
-
-            modal.classList.remove("hidden")           
-
+            modal.classList.remove("hidden")          
             closeModal.addEventListener("click", function(){
                 modal.classList.add("hidden")
             })
-
             const conn = await fetch("apis/api-get-single-item", {
                 method: "POST",
                 body: formData
@@ -159,18 +154,15 @@
 
             let formData = new FormData(form);
             formData.append('item_id', itemId);
-            console.log(formData.values, itemId)
 
             const conn = await fetch("apis/api-update-item", {
                 method: "POST",
                 body: formData
             })
             const res = await conn.text()
-
             if (conn.ok){
                 modal.classList.add("hidden")
             }
-            console.log(res)
             getItems()
         }
 
@@ -219,7 +211,6 @@
                 body: formData
             })
             const res = await conn.text()
-
             if(conn.ok){
                 item.remove();
             }

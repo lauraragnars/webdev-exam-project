@@ -1,6 +1,6 @@
 <?php
 // removes and displays errors - set to 0 on prod
-ini_set("display_errors", 1);
+ini_set('display_errors', 1);
 
 ?>
 

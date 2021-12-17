@@ -7,7 +7,7 @@
 
     if( !isset($_POST['message'])){ _res(400, ['info' => 'Message required']);}
 
-    $api_key = "286de1fe-c456-4edd-b303-c2c3d1ee25dc";
+    $api_key = '286de1fe-c456-4edd-b303-c2c3d1ee25dc';
 
     $fields = [
         'to_phone' => $_POST['to_phone'],

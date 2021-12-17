@@ -19,7 +19,6 @@ try{
 }
 
 try{
-    // get data
     $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email');
     $q->bindValue(':user_email', $_POST['email']);
     $q->execute();
@@ -33,7 +32,6 @@ try{
         _res(400, ['info' => 'Wrong password', 'error' => __LINE__]);
     }
 
-    // success
     session_start();
     $_SESSION['user_name'] = $row['user_name'];
     $_SESSION['user_last_name'] = $row['user_last_name'];

@@ -14,7 +14,6 @@ try{
     $q->execute();
     $items = $q->fetchAll();
 
-    // success
     echo(json_encode($items));
 
 }catch(Exception $ex){
