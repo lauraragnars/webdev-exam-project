@@ -219,7 +219,10 @@
                 body: formData
             })
             const res = await conn.text()
-            item.remove();
+
+            if(conn.ok){
+                item.remove();
+            }
         }
     </script>
 <?php
