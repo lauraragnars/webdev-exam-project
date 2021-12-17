@@ -14,7 +14,7 @@ define('_PRICE_MIN_LEN', 1);
 define('_PRICE_MAX_LEN', 10);
 define('_IMAGE_MIN_LEN', 2);
 define('_IMAGE_MAX_LEN', 255);
-define('_ITEMID_LEN', 32);
+define('_ITEMID_MAX_LEN', 32);
 
 
 // ##############################

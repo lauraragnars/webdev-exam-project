@@ -29,7 +29,10 @@ try{
   
     require_once(__DIR__.'/../private/send-email.php');
 
-    _res(200, ['info' => 'Email sent!']);
+    header('Content-Type: application/json');
+    
+    $response = ['info' => 'Email sent!'];
+    echo json_encode($response);
 
 }catch(Exception $ex){
     _res(500, ['info'=>'System under maintenence', 'error'=> __LINE__]);

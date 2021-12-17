@@ -17,25 +17,33 @@
     <h1>
         Welcome, <?php echo $_SESSION['user_name']; ?>
     </h1>
-    <form onsubmit="return false">
-        <label for="name">Item name</label>
-        <input type="text" id="name" name="item_name">
+    
+    <button onclick="openUploadModal()">Add new item</button>
 
-        <label for="desc">Item description</label>
-        <input type="text" id="desc" name="item_description">
+    <div class="upload-modal hidden">
+        <div class="upload-modal-content">
+            <div class="close-icon close-upload-modal">X</div>
+            <form onsubmit="return false">
+                <label for="name">Item name</label>
+                <input type="text" id="name" name="item_name">
 
-        <label for="price">Item price</label>
-        <input type="number" id="price" name="item_price">
+                <label for="desc">Item description</label>
+                <input type="text" id="desc" name="item_description">
 
-        <label for="image">Item image name</label>
-        <input type="text" id="image" name="item_image">
-        <div class="error-message"></div>
-        <button onclick="uploadItem()">Upload item</button>
-    </form>
+                <label for="price">Item price</label>
+                <input type="number" id="price" name="item_price">
 
-    <div class="item-modal">
+                <label for="image">Item image name</label>
+                <input type="text" id="image" name="item_image">
+                <div class="error-message"></div>
+                <button onclick="uploadItem()">Upload item</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="item-modal hidden">
         <div class="item-modal-content">
-            <div class="close-modal">X</div>
+            <div class="close-icon close-modal">X</div>
             <form id="update-form" onsubmit="return false">
                 <label for="name">Item name</label>
                 <input type="text" id="update_name" name="item_name">
@@ -52,25 +60,22 @@
             </form>
         </div>
     </div>
-
+    <h2 class="subheader">Your items</h2>
     <div id="own-items"></div>
+    <h2 class="subheader">Other items</h2>
     <div id="items">
         <?php
 
             $data = json_decode(file_get_contents("shop.txt"));
 
             foreach($data as $item){
-
-                $title = isset($item->title) ? $item->title : $item->title_en;
-                $price = isset($item->price) ? $item->price : $item->price_dk;
-
                 echo "<div class='item' data-id='{$item->id}'>
                         <div class='item-image'>
                             <img src='https://coderspage.com/2021-F-Web-Dev-Images/{$item->image}' />
                         </div>
                         <div class='item-text'>
-                            <div>{$title}</div>
-                            <div class='text-price'>{$price} $</div>
+                            <div class='price'>$ {$item->price}</div>
+                            <div>{$item->title_en}</div>
                         </div>
                     </div>";
             }
@@ -96,7 +101,7 @@
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${item.item_image}' />
                     </div>
                     <div class='item-text'>
-                        <div class="price">${item.item_price}</div>
+                        <div class="price">$ ${item.item_price}</div>
                         <div class="name">${item.item_name}</div>
                         <div class="desc">${item.item_description}</div>
                         <div class='trash' onclick="deleteItem()">🗑️</div>
@@ -107,6 +112,17 @@
             }
         }
 
+        function openUploadModal(){
+            const modal = document.querySelector(".upload-modal")
+            const closeModal = document.querySelector(".close-upload-modal")
+
+            modal.classList.remove("hidden")
+
+            closeModal.addEventListener("click", function(){
+                modal.classList.add("hidden")
+            })
+        }
+
         async function editItem(){
             const item = event.target.parentNode.parentNode
             const modal = document.querySelector(".item-modal")
@@ -114,13 +130,14 @@
             const closeModal = document.querySelector(".close-modal")
             const itemId = item.dataset.id
 
+            console.log(itemId, "item id")
             let formData = new FormData();
             formData.append('item_id', itemId);
 
-            modal.style.display = "block";
+            modal.classList.remove("hidden")           
 
             closeModal.addEventListener("click", function(){
-                modal.style.display = "none";
+                modal.classList.add("hidden")
             })
 
             const conn = await fetch("apis/api-get-single-item", {
@@ -138,6 +155,7 @@
         async function updateItem(){           
             const form = event.target.form;
             const itemId = document.querySelector("#update-form").dataset.id
+            const modal = document.querySelector(".item-modal")
 
             let formData = new FormData(form);
             formData.append('item_id', itemId);
@@ -148,6 +166,10 @@
                 body: formData
             })
             const res = await conn.text()
+
+            if (conn.ok){
+                modal.classList.add("hidden")
+            }
             console.log(res)
             getItems()
         }
@@ -158,6 +180,7 @@
             const itemDesc = document.querySelector("#desc").value
             const itemPrice = document.querySelector("#price").value
             const itemImage = document.querySelector("#image").value
+            const modal = document.querySelector(".upload-modal")
 
             const conn = await fetch("apis/api-upload-item", {
                 method: "POST",
@@ -166,19 +189,20 @@
             const res = await conn.json()
             
             if(conn.ok){
-                document.querySelector("#items").insertAdjacentHTML("afterbegin", 
+                document.querySelector("#own-items").insertAdjacentHTML("afterbegin", 
                 `<div class="item" data-id="${res}">
                     <div class='item-image'>
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${itemImage}' />
                     </div>
                     <div class='item-text'>
-                        <div class="price">${itemPrice}</div>
+                        <div class="price">$ ${itemPrice}</div>
                         <div class="name">${itemName}</div>
                         <div class="desc">${itemDesc}</div>
                         <div class='trash' onclick="deleteItem()">🗑️</div>
                         <div class='pen' onclick="editItem()">🖊️</div>
                     </div>
                 </div>`)
+                modal.classList.add("hidden")
             } else if (!conn.ok){
                 document.querySelector(".error-message").textContent = res.info;
             }

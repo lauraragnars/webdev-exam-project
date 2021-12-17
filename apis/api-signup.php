@@ -89,6 +89,7 @@ try{
   echo json_encode($response);
 
   $_message = "Thank you for signing up <a href='http:localhost:8888/validate-user.php?key=$verification_key&id=$user_id'>Click here to verify your account</a>";
+
   $_to_email = $_POST['email'];
 
   $_sms_message = "User created on Zillow";

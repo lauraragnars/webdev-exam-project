@@ -19,7 +19,7 @@ if( strlen($_POST['item_image']) < _IMAGE_MIN_LEN){ _res(400, ['info' => 'Item i
 if( strlen($_POST['item_image']) > _IMAGE_MAX_LEN){ _res(400, ['info' => 'Item image max '._IMAGE_MAX_LEN.' characters']);}
 
 if( !isset($_POST['item_id'])){ _res(400, ['info' => 'Item id required']); };
-if( strlen($_POST['item_id']) == _ITEMID_LEN){ _res(400, ['info' => 'item_id needs to be'._ITEMID_LEN.' characters']);}
+if( strlen($_POST['item_id']) > _ITEMID_MAX_LEN){ _res(400, ['info' => 'Item id cannot be more than'._ITEMID_MAX_LEN.' characters']); }
 
 try{
     $db = _db();

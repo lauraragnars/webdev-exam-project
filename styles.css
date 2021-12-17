@@ -12,15 +12,41 @@ img {
   width: 100%;
 }
 
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(https://www.zillowstatic.com/s3/homepage/static/_Desktop_Overlay_ChangeStartsHere_HC@2x.webp);
+}
+
+.logo-container {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
 .modal {
   box-shadow: rgba(119, 123, 128, 0.2) 0px 8px 24px;
-  border-radius: 5px;
+  border-radius: 1px;
   padding: 2rem;
   margin: 1rem auto;
   max-width: 25rem;
   display: block;
   position: relative;
   top: 1rem;
+  background-color: white;
+}
+
+.subheader {
+  font-family: "Open Sans", sans-serif;
+  color: rgb(0, 106, 255);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: 600;
 }
 
 a {
@@ -175,11 +201,18 @@ h1 {
 
 .error-message {
   font-family: "Open Sans", sans-serif;
-  color: rgb(240, 44, 44);
+  color: rgb(0, 106, 255);
   font-weight: 400;
   font-size: 1rem;
   margin-top: 1rem;
-  transition: 0.3s;
+}
+
+.message {
+  font-family: "Open Sans", sans-serif;
+  color: rgb(0, 106, 255);
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 1rem;
 }
 
 /*--- form ---  */
@@ -280,8 +313,6 @@ button:hover {
   padding: 1rem;
   gap: 0.5rem;
   position: relative;
-  /* height: fit-content;
-  align-items: flex-end; */
 }
 
 .trash {
@@ -300,16 +331,21 @@ button:hover {
   cursor: pointer;
 }
 
-.text-price {
+.price {
   white-space: nowrap;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .desc {
   flex-basis: 100%;
+  font-size: 14px;
+  color: rgb(54, 54, 54);
 }
 
-.item-modal {
-  display: none;
+.item-modal,
+.upload-modal {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -317,8 +353,22 @@ button:hover {
   height: 100vh;
   width: 100vw;
   z-index: 3;
+
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.3s;
 }
-.item-modal-content {
+
+.hidden {
+  visibility: hidden;
+  transition: 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.item-modal-content,
+.upload-modal-content {
   background-color: white;
   border-radius: 5px;
   padding: 2rem;
@@ -328,11 +378,15 @@ button:hover {
   position: relative;
 }
 
-.close-modal {
+.close-icon {
   position: absolute;
   top: 10px;
-  left: 10px;
+  right: 15px;
   cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  color: #006aff;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 /*--- loader ---  */
@@ -363,4 +417,30 @@ button:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/*--- profile ---  */
+
+#container-flex {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+@media (min-width: 800px) {
+  #container-flex {
+    flex-direction: row;
+  }
+}
+
+#container-flex div {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+#container-flex h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
 }

@@ -3,7 +3,7 @@
 require_once(__DIR__.'/../globals.php');
 
 if( !isset($_POST['item_id'])){ _res(400, ['info' => 'Item id required']); };
-if( strlen($_POST['item_id']) == _ITEMID_LEN){ http_response_code(400); echo 'item_id needs to be'._ITEMID_LEN.' characters'; exit(); }
+if( strlen($_POST['item_id']) > _ITEMID_MAX_LEN){ _res(400, ['info' => 'Item id cannot be more than'._ITEMID_MAX_LEN.' characters']); }
 
 try{
     $db = _db();

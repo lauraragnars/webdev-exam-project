@@ -6,6 +6,9 @@ require_once(__DIR__.'/components/header.php');
 if( !isset($_GET['key'])){
     echo "<div class='container middle'>
             <h1>Page not found</h1>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div>
         </div>";
     exit();
 }
@@ -13,6 +16,9 @@ if( !isset($_GET['key'])){
 if( strlen($_GET['key']) != 32 ){
     echo "<div class='container middle'>
             <h1>Page not found</h1>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div>
         </div>";
     exit();
 }
@@ -32,27 +38,30 @@ $q = $db->prepare('SELECT * FROM users WHERE user_id = :user_id');
 if( $_GET['key'] != $row['forgot_password_key']){
     echo "<div class='container middle'>
             <h1>Broken link, please try again later</h1>
-            <a href='home'>Back to home</a>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div
         </div>";
     exit();
 }
 
 ?>
 
-<div class="modal">
-   <h1>Reset password</h1>
-    <form data-id=<?= $_GET['id'] ?> onsubmit="return false">
-            <label for="password">New password</label>
-            <input type="password" name="password" id="password" placeholder="Password">
-            <label for="password2">Confirm password</label>
-            <input type="password" name="password2" id="password2" placeholder="Confirm password">
-            <h3 class="error-message"></h3>
-            <button onclick="resetPassword()">Reset password</button>
-            <div class="link">
-                <a href="index">Back to login</a>
-            </div>
-           
-        </form>
+<div class="wrapper">
+    <div class="modal">
+    <h1>Reset password</h1>
+        <form data-id=<?= $_GET['id'] ?> onsubmit="return false">
+                <label for="password">New password</label>
+                <input type="password" name="password" id="password" placeholder="Password">
+                <label for="password2">Confirm password</label>
+                <input type="password" name="password2" id="password2" placeholder="Confirm password">
+                <h3 class="error-message"></h3>
+                <button onclick="resetPassword()">Reset password</button>
+                <div class="link">
+                    <a href="index">Back to login</a>
+                </div>
+            </form>
+    </div>
 </div>
 
 <script>

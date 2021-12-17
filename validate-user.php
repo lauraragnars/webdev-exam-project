@@ -6,6 +6,9 @@ require_once(__DIR__.'/components/header.php');
 if( !isset($_GET['key'])){
     echo "<div class='container middle'>
             <h1>Page not found</h1>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div>
         </div>";
     exit();
 }
@@ -13,6 +16,9 @@ if( !isset($_GET['key'])){
 if( strlen($_GET['key']) != 32 ){
     echo "<div class='container middle'>
             <h1>Page not found</h1>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div>
         </div>";
     exit();
 }
@@ -33,6 +39,9 @@ $q = $db->prepare('SELECT * FROM users WHERE user_id = :user_id');
 if( $_GET['key'] != $row['verification_key']){
     echo "<div class='container middle'>
             <h1>Broken link, please try again</h1>
+            <div class='link'>
+                <a href='home'>Back to home</a>
+            </div>
         </div>";
     exit();
 }
@@ -44,9 +53,10 @@ $q2 = $db->prepare('UPDATE users SET verified = :verified WHERE user_id = :user_
 
 echo "<div class='container middle'>
         <h1>Your email has been verified!</h1>
-        <a href='home'>Back to home</a>
+        <div class='link'>
+            <a href='home'>Back to home</a>
+        </div>
     </div>";
 
 require_once(__DIR__.'/components/footer.php');
-
 ?>
