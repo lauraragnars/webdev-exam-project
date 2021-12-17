@@ -56,6 +56,7 @@
 
                 <label for="image">Item image name</label>
                 <input type="text" id="update_image" name="item_image">
+                <div class="message"></div>
                 <button onclick="updateItem()">Update item</button>
             </form>
         </div>
@@ -74,8 +75,9 @@
                             <img src='https://coderspage.com/2021-F-Web-Dev-Images/{$item->image}' />
                         </div>
                         <div class='item-text'>
-                            <div class='price'>$ {$item->price}</div>
+                            <div class='price'>$ {$item->price_en}</div>
                             <div>{$item->title_en}</div>
+                            <div class='desc'>{$item->desc_en}</div>
                         </div>
                     </div>";
             }
@@ -129,7 +131,7 @@
             const closeModal = document.querySelector(".close-modal")
             const itemId = item.dataset.id
             let formData = new FormData();
-            
+
             formData.append('item_id', itemId);
             modal.classList.remove("hidden")          
             closeModal.addEventListener("click", function(){
@@ -151,19 +153,24 @@
             const form = event.target.form;
             const itemId = document.querySelector("#update-form").dataset.id
             const modal = document.querySelector(".item-modal")
-
             let formData = new FormData(form);
+
+            document.querySelector(".message").textContent = "";
             formData.append('item_id', itemId);
 
             const conn = await fetch("apis/api-update-item", {
                 method: "POST",
                 body: formData
             })
-            const res = await conn.text()
-            if (conn.ok){
+            const res = await conn.json()
+
+            if (!conn.ok){
+                document.querySelector(".message").textContent = res.info;
+            } else if(conn.ok){
                 modal.classList.add("hidden")
+                getItems()
             }
-            getItems()
+           
         }
 
         async function uploadItem(){

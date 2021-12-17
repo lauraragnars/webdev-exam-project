@@ -301,6 +301,7 @@ button:hover {
 .item img {
   min-height: 100%;
   object-fit: cover;
+  max-height: 250px;
 }
 
 .item-image {
