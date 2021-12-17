@@ -128,8 +128,8 @@
             const modalContent = document.querySelector(".item-modal-content")
             const closeModal = document.querySelector(".close-modal")
             const itemId = item.dataset.id
-
             let formData = new FormData();
+            
             formData.append('item_id', itemId);
             modal.classList.remove("hidden")          
             closeModal.addEventListener("click", function(){
@@ -182,7 +182,7 @@
             
             if(conn.ok){
                 document.querySelector("#own-items").insertAdjacentHTML("afterbegin", 
-                `<div class="item" data-id="${res}">
+                `<div class="item" data-id="${res.item_id}">
                     <div class='item-image'>
                         <img src='https://coderspage.com/2021-F-Web-Dev-Images/${itemImage}' />
                     </div>

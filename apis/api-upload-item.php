@@ -35,7 +35,7 @@ try{
     $q->bindValue(':item_image', $_POST['item_image']);
     $q->execute();
 
-    _res(200, ['info' => "Item created with item id: $item_id"]);
+    _res(200, ['info' => "Item created with item id: $item_id", 'item_id' => $item_id]);
     
 }catch(Exception $ex){
     http_response_code(500);
