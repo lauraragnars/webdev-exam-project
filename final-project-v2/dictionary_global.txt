@@ -1,0 +1,12 @@
+{
+    "_1": {
+        "en": "Hi",
+        "dk": "Hej",
+        "is": "Hæ"
+    },
+    "_2": {
+        "en": "Welcome",
+        "dk": "Velkommen",
+        "is": "Velkomin/nn"
+    }
+}
