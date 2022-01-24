@@ -31,6 +31,16 @@ try{
   }
 
   try{
+    // New code 
+    $q2 = $db->prepare('SELECT * FROM users WHERE user_email = :email');
+    $q2->bindValue(':email', $_POST['email']);
+    $q2->execute();
+    $row = $q2 -> fetch();
+    
+    if ($row){
+      _res(400, ['info' => 'This email is in use by another user']);
+    }
+
     $q = $db->prepare('UPDATE users SET user_name = :user_name, user_email = :user_email, user_last_name = :user_last_name, user_phone_number = :user_phone_number WHERE user_email = :email');
     $q->bindValue(':user_name', $_POST['name']);
     $q->bindValue(':user_last_name', $_POST['last_name']);
