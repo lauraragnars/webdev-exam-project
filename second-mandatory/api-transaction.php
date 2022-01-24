@@ -28,6 +28,12 @@ try {
     $balance_from = $row_from['balance'];
     $new_from_balance = $balance_from - $_POST['transfer_amount'];
 
+    if($new_from_balance < 0){
+        _res(500, ['info' => 'Insufficient funds', 'error' => __LINE__]);
+        $db->rollBack();
+        exit();
+    }
+
     if(!$row_from){
         _res(500, ['info' => 'From user does not exist', 'error' => __LINE__]);
         $db->rollBack();

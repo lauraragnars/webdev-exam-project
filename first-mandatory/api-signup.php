@@ -32,7 +32,7 @@ try{
 
 try{
 
-  $q2 = $db->prepare('SELECT * FROM users WHERE user_email = :email');
+  $q2 = $db->prepare('SELECT * FROM users_old WHERE user_email = :email');
   $q2->bindValue(":email", $_POST['email']);
   $q2->execute();
   $row = $q2 -> fetch();
@@ -42,8 +42,8 @@ try{
   }
 
   // Insert data in the DB
-  $q = $db->prepare('INSERT INTO users 
-  VALUES(:user_id, :user_name, :user_email, :user_last_name, :user_password)');
+  $q = $db->prepare('INSERT INTO users_old 
+  VALUES(:user_id, :user_name, :user_last_name, :user_email, :user_password)');
   $q->bindValue(":user_id", null); // The db will give this automati.
   $q->bindValue(":user_name", $_POST['name']);
   $q->bindValue(":user_email", $_POST['email']);

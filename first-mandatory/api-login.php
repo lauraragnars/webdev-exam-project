@@ -19,7 +19,7 @@ try{
 }
 
 try{
-    $q = $db->prepare('SELECT * FROM users WHERE user_email = :user_email AND user_password = :user_password');
+    $q = $db->prepare('SELECT * FROM users_old WHERE user_email = :user_email AND user_password = :user_password');
     $q->bindValue(':user_email', $_POST['email']);
     $q->bindValue(':user_password', $_POST['password']);
     $q->execute();
